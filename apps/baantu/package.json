@@ -1,3 +1,6 @@
 {
-  "name": "baantu"
+  "name": "baantu",
+  "dependencies": {
+    "effects": "^0.0.5"
+  }
 }
