@@ -63,5 +63,21 @@
   "projects": {
     "pearl": "apps/the-black-pearl",
     "pearl-e2e": "apps/the-black-pearl-e2e"
+  },
+  "watchOptions": {
+    "watchman": {
+      "enabled": true,
+      "followSymlinks": true,
+      "ignorePatterns": [
+        "**/node_modules/**",
+        "**/.git/**",
+        "**/dist/**",
+        "**/coverage/**",
+        "**/.expo/**",
+        "**/ios/Pods/**",
+        "**/android/.gradle/**"
+      ],
+      "roots": ["{workspaceRoot}"]
+    }
   }
 }
