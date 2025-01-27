@@ -26,39 +26,19 @@
   "plugins": [
     {
       "plugin": "@nx/expo/plugin",
-      "options": {
-        "startTargets": ["@nx/expo:start"]
-      }
+      "options": { "startTargets": ["@nx/expo:start"] }
     }
   ],
   "targetDefaults": {
-    "build": {
-      "dependsOn": ["^build"],
-      "cache": true
-    },
-    "test": {
-      "cache": true
-    },
-    "lint": {
-      "cache": true
-    }
+    "build": { "dependsOn": ["^build"], "cache": true },
+    "test": { "cache": true },
+    "lint": { "cache": true }
   },
-  "workspaceLayout": {
-    "appsDir": "apps",
-    "libsDir": "libs"
-  },
-  "affected": {
-    "defaultBase": "main"
-  },
+  "workspaceLayout": { "appsDir": "apps", "libsDir": "libs" },
+  "affected": { "defaultBase": "main" },
   "npmScope": "baantu",
   "defaultBase": "main",
-  "generators": {
-    "@nx/react": {
-      "application": {
-        "babel": true
-      }
-    }
-  },
+  "generators": { "@nx/react": { "application": { "babel": true } } },
   "defaultProject": "pearl",
   "projects": {
     "pearl": "apps/the-black-pearl",
@@ -79,5 +59,6 @@
       ],
       "roots": ["{workspaceRoot}"]
     }
-  }
+  },
+  "nxCloudId": "67981c7580c6a2675056dff3"
 }
