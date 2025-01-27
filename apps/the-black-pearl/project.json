@@ -1,9 +1,47 @@
 {
-  "name": "the-black-pearl",
+  "name": "pearl",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/the-black-pearl/src",
   "projectType": "application",
   "tags": [],
   "// targets": "to see all targets run: nx show project the-black-pearl --web",
-  "targets": {}
+  "targets": {
+    "start": {
+      "executor": "@nx/expo:start",
+      "dependsOn": ["ensure-symlink"],
+      "options": {
+        "port": 8081
+      }
+    },
+    "serve": {
+      "executor": "@nx/expo:start",
+      "dependsOn": ["ensure-symlink"],
+      "options": {
+        "port": 8081
+      }
+    },
+    "run-ios": {
+      "executor": "@nx/expo:run",
+      "dependsOn": ["ensure-symlink"],
+      "options": {
+        "platform": "ios",
+        "device": "iPhone 15 Pro Max"
+      }
+    },
+    "run-android": {
+      "executor": "@nx/expo:run",
+      "dependsOn": ["ensure-symlink"],
+      "options": {
+        "platform": "android"
+      }
+    },
+    "build": {
+      "executor": "@nx/expo:build",
+      "options": {}
+    },
+    "ensure-symlink": {
+      "executor": "@nx/expo:ensure-symlink",
+      "options": {}
+    }
+  }
 }

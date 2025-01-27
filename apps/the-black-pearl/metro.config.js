@@ -1,33 +1,32 @@
 const { withNxMetro } = require('@nx/expo');
 const { getDefaultConfig } = require('@expo/metro-config');
-const { mergeConfig } = require('metro-config');
 
-const defaultConfig = getDefaultConfig(__dirname);
-const { assetExts, sourceExts } = defaultConfig.resolver;
+const path = require('path');
 
-/**
- * Metro configuration
- * https://reactnative.dev/docs/metro
- *
- * @type {import('metro-config').MetroConfig}
- */
-const customConfig = {
-  cacheVersion: 'the-black-pearl',
-  transformer: {
-    babelTransformerPath: require.resolve('react-native-svg-transformer'),
-  },
-  resolver: {
-    assetExts: assetExts.filter((ext) => ext !== 'svg'),
-    sourceExts: [...sourceExts, 'cjs', 'mjs', 'svg'],
-  },
-};
+const projectRoot = __dirname;
+const workspaceRoot = path.resolve(projectRoot, '../..');
 
-module.exports = withNxMetro(mergeConfig(defaultConfig, customConfig), {
-  // Change this to true to see debugging info.
-  // Useful if you have issues resolving modules
-  debug: false,
-  // all the file extensions used for imports other than 'ts', 'tsx', 'js', 'jsx', 'json'
-  extensions: [],
-  // Specify folders to watch, in addition to Nx defaults (workspace libraries and node_modules)
-  watchFolders: [],
-});
+// Create the default Metro config
+const config = getDefaultConfig(projectRoot);
+
+// Add the additional `cjs` extension to the resolver
+config.resolver.sourceExts.push('cjs');
+
+// Add support for importing workspace projects
+config.watchFolders = [workspaceRoot];
+config.resolver.nodeModulesPaths = [
+  path.resolve(projectRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'node_modules'),
+];
+
+// Configure for SVG support
+config.resolver.assetExts = config.resolver.assetExts.filter((ext) => ext !== 'svg');
+config.resolver.sourceExts = [...config.resolver.sourceExts, 'svg'];
+
+// Configure expo-router to use app directory
+config.resolver.roots = [
+  path.resolve(projectRoot, 'app'),
+  path.resolve(projectRoot, '.'),
+];
+
+module.exports = withNxMetro(config, projectRoot);

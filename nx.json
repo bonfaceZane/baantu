@@ -14,45 +14,24 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  "nxCloudId": "6797eba82898d30cdd001e13",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "test", "lint"],
+        "packageManager": "bun"
+      }
+    }
+  },
   "plugins": [
     {
       "plugin": "@nx/expo/plugin",
       "options": {
-        "startTargetName": "start",
-        "buildTargetName": "build",
-        "prebuildTargetName": "prebuild",
-        "serveTargetName": "serve",
-        "installTargetName": "install",
-        "exportTargetName": "export",
-        "submitTargetName": "submit",
-        "runIosTargetName": "run-ios",
-        "runAndroidTargetName": "run-android"
-      }
-    },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      }
-    },
-    {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
+        "startTargets": ["@nx/expo:start"]
       }
     }
   ],
   "targetDefaults": {
-    "e2e-ci--**/*": {
-      "dependsOn": ["^export"]
-    },
     "build": {
       "dependsOn": ["^build"],
       "cache": true
@@ -64,13 +43,25 @@
       "cache": true
     }
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "test", "lint"],
-        "packageManager": "bun"
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "npmScope": "baantu",
+  "defaultBase": "main",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true
       }
     }
+  },
+  "defaultProject": "pearl",
+  "projects": {
+    "pearl": "apps/the-black-pearl",
+    "pearl-e2e": "apps/the-black-pearl-e2e"
   }
 }
